@@ -24,7 +24,6 @@ import onnx
 import torch
 import copy
 
-from onnxruntime.quantization import quantize_dynamic,QuantType
 
 
 def onnx_converter(model_path, converted_path):
@@ -49,13 +48,6 @@ def onnx_converter(model_path, converted_path):
 
     inferred_model = onnx.shape_inference.infer_shapes(onnx_model)
     print('After shape inference, the shape info of Y is:\n{}'.format(inferred_model.graph.value_info))
-
-
-def onnx_quantizer(onnx_path, quantized_path):
-
-    model_fp32 = '/content/drive/MyDrive/w2loriginalhw3shape.onnx'
-    model_quant = '/content/drive/MyDrive/w2lquant6.onnx'
-    quantized_model = quantize_dynamic(model_fp32, model_quant, weight_type=QuantType.QUInt8)
 
 
 
