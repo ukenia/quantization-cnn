@@ -14,11 +14,11 @@ Repo Structure:
 * `EDADataset.ipynb` - is a jupyter notebook perform EDA on HW4P2 dataset. 
 
 Usage:
-## Train the model:
+### To Train the model:
 ```
 python train.py
 ```
-### Evaluate with an already trained model:
+### To Evaluate with an already trained model:
 #### Float_32 model:
 ```
 python evaluate.py --model ./models/wav2letter_31.pth --datadir ./HW4/data/ --batchsize 64
