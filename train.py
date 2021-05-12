@@ -166,7 +166,7 @@ if __name__ == '__main__':
     letter2index, index2letter = create_dictionaries(LETTER_LIST)
 
     BASE_PATH = ""
-    DATA_PATH = os.path.join(BASE_PATH, "data-simple/")
+    DATA_PATH = os.path.join(BASE_PATH, "data/")
     MODEL_PATH = os.path.join(BASE_PATH, "models/")
     PREDICTION_PATH = os.path.join(BASE_PATH, "predictions/")
 
