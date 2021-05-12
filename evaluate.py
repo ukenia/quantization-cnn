@@ -19,6 +19,7 @@ import pandas as pd
 import torch
 import timeit
 import torch.nn as nn
+import onnxruntime as rt
 from torch.autograd import Variable
 from ctcdecode import CTCBeamDecoder
 
@@ -39,18 +40,25 @@ parser.add_argument('--datadir', type=str, default='data',
                     help='data directory where train.npy, dev.npy, train_transcripts.npy, and dev_transcripts.npy are present')
 parser.add_argument('--device', type=str, default='cuda',
                     help='cuda or cpu are valid options')
+parser.add_argument('--quantized', action='store_true', default=False)
+
+
 
 # Evaluate the model
 @torch.no_grad()
-def evaluate_model(val_loader, model, criterion, batchsize=32, beamwidth=20, device=None):
+def evaluate_model(val_loader, model, criterion, batchsize=32, beamwidth=20, device=None, quantized=False):
     predictions = []
     actuals = []
     val_loss = 0
 
     # distances = []
-
+    input_name = ""
     # Set model in validation mode
-    model.eval()
+    if not quantized:
+        model.eval()
+    else:
+        input_name = model.get_inputs()[0].name
+
     stime = time.time()
 
     for i, (inputs, targets, input_lengths, target_lengths, input_len_ratio) in enumerate(val_loader):
@@ -60,7 +68,11 @@ def evaluate_model(val_loader, model, criterion, batchsize=32, beamwidth=20, dev
         target_lengths = target_lengths.to(device)
 
         # evaluate the model on the validation set
-        out = model(inputs.float())
+        if not quantized:
+            out = model(inputs.float())
+        else:
+            out = torch.tensor(model.run(None, {input_name: inputs.numpy().astype(np.float32)})[0])
+           
         out = out.permute(2, 1, 0)
 
         seq_length = out.size(0)
@@ -119,6 +131,8 @@ if __name__=="__main__":
     hparams = get_hyperparameters()
     hparams["num_workers"] = num_workers
 
+    
+
     args = parser.parse_args()
     print(args)
     print(f"Loading model: {args.model}")
@@ -127,9 +141,16 @@ if __name__=="__main__":
     DEVICE = torch.device(args.device)
 
     model = Wav2Letter(args.outvocab)
-    mdl = torch.load(args.model)
-    model.load_state_dict(mdl.state_dict())
-    model.to(DEVICE)
+    
+    quantized = args.quantized
+
+    if not quantized: 
+        mdl = torch.load(args.model, map_location=DEVICE)
+        model.load_state_dict(mdl.state_dict())
+        model.to(DEVICE)
+    else:
+        model = rt.InferenceSession(args.model)
+    
 
 
     # Filepaths
@@ -144,5 +165,5 @@ if __name__=="__main__":
     val_args = dict(shuffle=False, batch_size=args.batchsize, num_workers=hparams["num_workers"], drop_last=True,
                     collate_fn=collate_train_val)
     val_loader = DataLoader(val_data, **val_args)
-    evaluate_model(val_loader, model, criterion, args.batchsize, args.beamwidth, DEVICE)
+    evaluate_model(val_loader, model, criterion, args.batchsize, args.beamwidth, DEVICE, quantized)
 
