@@ -1,7 +1,7 @@
 # Quantization of CNN-based Language Models
 This repository will host the code for the project 'Quantization of CNN-based Language Models' which is a part of Intro to Deep Learning course at CMU.
 
-For details about the project please refer to the report:
+For details about the project please refer to the report: `IDLProjectFinalReport.pdf`
 
 Repo Structure:
 * `model.py` - has the Wav2Letter model class defined.
