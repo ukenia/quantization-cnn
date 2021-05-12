@@ -12,7 +12,7 @@ Repo Structure:
 * `data/*` - The data folder contains the Dataset class and the dataloaders used for training. The data - train data, train transcripts, validation data and validation labels should be present in the data folder
 * `quantization/*` - The quantization folder contains the code used to export the trained model into an ONNX model and quantize the model using ONNX runtime. The inference can be done on the quantized .onnx models. Use the `evaluate.py` with the `--quantized` flag to save the quantized model and run the inference.
 * `EDADataset.ipynb` - is a jupyter notebook perform EDA on HW4P2 dataset. 
-* `pretrained-models/*` - Contains the pretrained models on HW3 and HW4 data
+* `pretrained-models/*` - Contains the pretrained models on HW3 and HW4 data. The .onnx models are the quantized models.
 
 ### Usage:
 #### To Train the model:
