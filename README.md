@@ -19,12 +19,12 @@ Repo Structure:
 python train.py
 ```
 #### To Evaluate with an already trained model:
-#### Float_32 model:
+* Float_32 model:
 ```
 python evaluate.py --model ./models/wav2letter_31.pth --datadir ./HW4/data/ --batchsize 64
 ```
 
-#### Quantized model:
+* Quantized model:
 ```
 python evaluate.py --quantized --model ./models/quantized_model_int8.onnx --datadir ./HW4/data/
 ```
