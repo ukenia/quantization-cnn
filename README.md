@@ -13,12 +13,12 @@ Repo Structure:
 * `quantization/*` - The quantization folder contains the code used to export the trained model into an ONNX model and quantize the model using ONNX runtime. The inference can be done on the quantized .onnx models. Use the `evaluate.py` with the `--quantized` flag to save the quantized model and run the inference.
 * `EDADataset.ipynb` - is a jupyter notebook perform EDA on HW4P2 dataset. 
 
-Usage:
-### To Train the model:
+### Usage:
+#### To Train the model:
 ```
 python train.py
 ```
-### To Evaluate with an already trained model:
+#### To Evaluate with an already trained model:
 #### Float_32 model:
 ```
 python evaluate.py --model ./models/wav2letter_31.pth --datadir ./HW4/data/ --batchsize 64
