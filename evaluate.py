@@ -143,6 +143,9 @@ if __name__=="__main__":
     model = Wav2Letter(args.outvocab)
     
     quantized = args.quantized
+    if quantized and args.device=='cuda':
+      print("Please note quantized models are not supported on GPU yet, so changing the backend to CPU")
+      DEVICE = torch.device('cpu')
 
     if not quantized: 
         mdl = torch.load(args.model, map_location=DEVICE)
