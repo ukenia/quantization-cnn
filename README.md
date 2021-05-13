@@ -9,7 +9,8 @@ Repo Structure:
 * `evaluate.py` - takes a pretrained model, data directory and evaluates the model and returns average loss and average Levenshtien distance. 
 * `hyperparameters.py` - contains our base parameters. To experiment with different hyperparameters, please change this file. 
 * `utils/*` - has all the supporting utility codefiles that train, evaluate, and model file would need. 
-* `data/*` - The data folder contains the Dataset class and the dataloaders used for training. The data - train data, train transcripts, validation data and validation labels should be present in the data folder
+* `data/*` - The data folder contains the Dataset class and the dataloaders used for training. The data - train data, train transcripts, validation data and validation labels should be present in the data folder.
+* `quantization/*` - has supplementary scripts for quantization.
 * `export_and_quantize.py` - contains the code used to export the trained model into an ONNX model and quantize the model using ONNX runtime. The inference can be done on the quantized .onnx models. Use the `evaluate.py` with the `--quantized` flag to save the quantized model and run the inference.
 * `get_model_summary.py` - contains the code to get summary for the PyTorch model.
 * `hardware_specs.py` - contains the code to fetch CPU and GPU information for benchmarking and comparison.
