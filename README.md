@@ -14,6 +14,7 @@ Repo Structure:
 * `export_and_quantize.py` - contains the code used to export the trained model into an ONNX model and quantize the model using ONNX runtime. The inference can be done on the quantized .onnx models. Use the `evaluate.py` with the `--quantized` flag to save the quantized model and run the inference.
 * `get_model_summary.py` - contains the code to get summary for the PyTorch model.
 * `hardware_specs.py` - contains the code to fetch CPU and GPU information for benchmarking and comparison.
+* `requirements.txt` - contains list of Python packages required for code execution.
 * `EDADataset.ipynb` - is a jupyter notebook perform EDA on HW4P2 dataset. 
 * `pretrained-models/*` - Contains the pretrained models on HW3 and HW4 data. The .onnx models are the quantized models.
 
