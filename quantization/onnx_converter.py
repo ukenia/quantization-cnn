@@ -1,3 +1,5 @@
+# further documentation: https://pytorch.org/tutorials/advanced/super_resolution_with_onnxruntime.html
+
 import PIL
 import timeit
 import os
@@ -31,7 +33,7 @@ def onnx_converter(model_path, converted_path):
     example_input =  torch.randn(64, 40, 100, requires_grad=True)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    model = Wav2Letter(42)
+    model = Wav2Letter(35)
     model_best_ = torch.load(model_path, map_location=torch.device('cpu'))
     model.load_state_dict(model_best_.state_dict())
 
