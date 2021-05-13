@@ -30,6 +30,16 @@ python evaluate.py --model ./models/wav2letter_31.pth --datadir ./HW4/data/ --ba
 python evaluate.py --quantized --model ./models/quantized_model_int8.onnx --datadir ./HW4/data/
 ```
 
+#### To export PyTorch model to ONNX and quantize it:
+* Export model to ONNX
+```
+python export_and_quantize.py --pypath ./Project/w2l30_6.pth --quantize 0 --classes 35 --outpath ./Project/exported_model.onnx
+```
+* Quantize ONNX model
+```
+python export_and_quantize.py --quantize 1 --classes 35 --outpath ./Project/exported_model.onnx --quantpath ./Project/model_quant.onnx --excludenodes Conv_0 Conv_18 Conv_20
+```
+
 #### Note:
 * Currently, there is only a CPU support for the quantized models.
 
