@@ -11,3 +11,5 @@ py-cpuinfo
 argparse
 json
 torchsummary
+matplotlib
+seaborn
