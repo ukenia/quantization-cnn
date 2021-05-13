@@ -1,0 +1,13 @@
+torch
+numpy
+io
+pillow
+os
+sys
+torchvision
+sklearn
+datetime
+py-cpuinfo
+argparse
+json
+torchsummary
